@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  role_name: 
+  author: Mark Honomichl
+  description: 
+  company: AustinCloudGuru
+  namespace: austincloudguru
+  license: MIT
+  min_ansible_version: 2.10
+  platforms:
+    - name: Amazon
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+        - focal
+    - name: EL
+      versions:
+        - 7
+        - 8
+  galaxy_tags: []
+
+dependencies: []
