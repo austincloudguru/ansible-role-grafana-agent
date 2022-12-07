@@ -44,7 +44,7 @@ jobs:
     strategy:
       matrix:
         distro:
-          # - ubuntu:22.04
+          - ubuntu:22.04
           - amazonlinux:2
           - oraclelinux:8
 
