@@ -44,12 +44,9 @@
 #     strategy:
 #       matrix:
 #         distro:
-#           - ubuntu:16.04
-#           - ubuntu:18.04
-#           - ubuntu:20.04
-#           - centos:7
-#           - centos:8
+#           - ubuntu:22.04
 #           - amazonlinux:2
+#           - oraclelinux:8
 
 #     steps:
 #       - name: Check out the codebase.

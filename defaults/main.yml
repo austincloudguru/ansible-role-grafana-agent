@@ -1,2 +1,5 @@
 ---
-# defaults file for ansible-role-template
+grafana_agent_user: "grafana-agent"
+grafana_agent_group: "grafana-agent"
+grafana_agent_uid: "10012"
+grafana_agent_gid: "10012"

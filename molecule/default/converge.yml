@@ -3,7 +3,5 @@
   hosts: all
   vars:
 
-  tasks:
-    - name: "Include Ansible Role"
-      ansible.builtin.include_role:
-        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+  roles:
+    - role: austincloudguru.grafana_agent

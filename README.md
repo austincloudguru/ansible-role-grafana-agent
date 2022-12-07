@@ -1,26 +1,45 @@
 Role Name
 =========
-[![Molecule](https://github.com/austincloudguru/ansible-role-template/workflows/Molecule/badge.svg?event=push)](https://github.com/austincloudguru/ansible-role-template/actions?query=workflow%3AMolecule)
-![Latest Version](https://img.shields.io/github/v/tag/austincloudguru/ansible-role-template?sort=semver&label=Latest%20Version) 
-[![License](https://img.shields.io/github/license/austincloudguru/ansible-role-template)](https://github.com/austincloudguru/ansible-role-template/blob/master/LICENSE)
+[![Molecule](https://github.com/austincloudguru/ansible-role-grafana-agent/workflows/Molecule/badge.svg?event=push)](https://github.com/austincloudguru/ansible-role-grafana-agent/actions?query=workflow%3AMolecule)
+![Latest Version](https://img.shields.io/github/v/tag/austincloudguru/ansible-role-grafana-agent?sort=semver&label=Latest%20Version) 
+[![License](https://img.shields.io/github/license/austincloudguru/ansible-role-grafana-agent)](https://github.com/austincloudguru/ansible-role-template/blob/master/LICENSE)
 
-A brief description of the role goes here.
+!!!! THIS ROLE IS NOT READY FOR PRODUCTION USE.  DO NOT USE.  !!!!
+This role installs and configures the Grafana agent on a linux host for use with Grafana Cloud.
 
 Requirements
 ------------
+none
 
-Any pre-requisites that may not be covered by Ansible itself or the role should
-be mentioned here. For instance, if the role uses the EC2 module, it may be a
-good idea to mention in this section that the boto package is required.
 
 Role Variables
 --------------
+### Default
 
-A description of the settable variables for this role should go here, including
-any variables that are in defaults/main.yml, vars/main.yml, and any variables
-that can/should be set via parameters to the role. Any variables that are read
-from other roles and/or the global scope (ie. hostvars, group vars, etc.) should
-be mentioned here as well.
+For most people, the default variables that are set should be fine, but there are use cases for changing them.  They are:
+
+     grafana_agent_user                      # Default User (grafana-agent)
+     grafana_agent_group                     # Default Group (grafana-agent)
+     grafana_agent_uid                       # Default UID (10012)
+     grafana_agent_gid                       # Default GID (10012)
+
+Note: I define/create the user/group outside of the RPM so that UID/GIDs don't clash with others and so that they are consistent across all the nodes.
+
+### Playbook Variables
+Within your playbook, you should set the following variables:
+
+     grafana_agent_prometheus_id        # The ID of the Grafana Cloud Prometheus server
+     grafana_agent_loki_id              # The ID of the Grafana Cloud Loki server
+     grafana_agent_api_key              # The API of the Grafana Cloud instance
+     grafana_agent_prometheus_url                     # 
+     grafana_agent_loki_url             # 
+     grafana_agent_hostname             # 
+     grafana_agent_             # 
+     grafana_agent_             # 
+     grafana_agent_             # 
+     grafana_agent_             # 
+     grafana_agent_             # 
+
 
 Dependencies
 ------------
@@ -37,7 +56,7 @@ passed in as parameters) is always nice for users too:
 
     - hosts: servers
       roles:
-         - { role: ansible-role-template, x: 42 }
+         - { role: ansible-role-grafana-agent, x: 42 }
 
 License
 -------

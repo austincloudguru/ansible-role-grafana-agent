@@ -1,12 +1,12 @@
 ---
 galaxy_info:
-  role_name: 
+  role_name: grafana_agent
   author: Mark Honomichl
-  description: 
+  description: Installs the Grafana Agent
   company: AustinCloudGuru
   namespace: austincloudguru
   license: MIT
-  min_ansible_version: 2.10
+  min_ansible_version: '2.10'
   platforms:
     - name: Amazon
       versions:
@@ -18,8 +18,9 @@ galaxy_info:
         - focal
     - name: EL
       versions:
-        - 7
-        - 8
-  galaxy_tags: []
+        - '7'
+        - '8'
+  galaxy_tags:
+    - grafana
 
 dependencies: []

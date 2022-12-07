@@ -1,2 +1,6 @@
 ---
-# handlers file for ansible-role-template
+- name: Enable and Start Grafana
+  ansible.builtin.service:
+    name: grafana-agent
+    enabled: true
+    state: started
