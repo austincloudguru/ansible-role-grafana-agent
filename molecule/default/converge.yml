@@ -8,6 +8,13 @@
       api-key: abcdef-ghikjl-mnopq-rstuv-wxyz
       prometheus-url: https://prometheus.example.com
       loki-url: https://prometheus.example.com
+    grafana_agent_external_labels:
+      environment: development
+      computer: molecule
+    grafana_agent_logs:
+      - job_name: integrations/node_exporter
+        log_paths:
+          - /var/log/*.log
 
   roles:
     - role: austincloudguru.grafana_agent

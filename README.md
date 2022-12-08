@@ -4,8 +4,7 @@ Role Name
 ![Latest Version](https://img.shields.io/github/v/tag/austincloudguru/ansible-role-grafana-agent?sort=semver&label=Latest%20Version) 
 [![License](https://img.shields.io/github/license/austincloudguru/ansible-role-grafana-agent)](https://github.com/austincloudguru/ansible-role-template/blob/master/LICENSE)
 
-!!!! THIS ROLE IS NOT READY FOR PRODUCTION USE.  DO NOT USE.  !!!!
-This role installs and configures the Grafana agent on a linux host for use with Grafana Cloud.
+This role installs and configures the Grafana agent on a linux host for use with Grafana Cloud.  It is very much in the early stages, so use at your own risk.
 
 Requirements
 ------------
