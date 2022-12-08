@@ -42,7 +42,7 @@ grafana_agent_logs:
   - job_name: integrations/node_exporter     # The name of the job
     log_paths:                     
       - /var/log/*.log                       # List of the log paths to forward
-```yaml
+```
 
 
 Dependencies
