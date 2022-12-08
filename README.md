@@ -18,27 +18,31 @@ Role Variables
 
 For most people, the default variables that are set should be fine, but there are use cases for changing them.  They are:
 
-     grafana_agent_user                      # Default User (grafana-agent)
-     grafana_agent_group                     # Default Group (grafana-agent)
-     grafana_agent_uid                       # Default UID (10012)
-     grafana_agent_gid                       # Default GID (10012)
+```yaml
+grafana_agent_user                           # Default User (grafana-agent)
+grafana_agent_group                          # Default Group (grafana-agent)
+grafana_agent_uid                            # Default UID (10012)
+grafana_agent_gid                            # Default GID (10012)
+```
 
 Note: I define/create the user/group outside of the RPM so that UID/GIDs don't clash with others and so that they are consistent across all the nodes.
 
 ### Playbook Variables
 Within your playbook, you should set the following variables:
 
-     grafana_agent_config:
-       prometheus_id        # The ID of the Grafana Cloud Prometheus server
-       loki_id              # The ID of the Grafana Cloud Loki server
-       api_key              # The API of the Grafana Cloud instance
-       prometheus_url       # The URL of the Grafana Cloud Prometheus server
-       loki_url             # The URL of the Grafana Cloud Loki server
+```yaml
+grafana_agent_config:
+  prometheus_id                              # The ID of the Grafana Cloud Prometheus server
+  loki_id                                    # The ID of the Grafana Cloud Loki server
+  api_key                                    # The API of the Grafana Cloud instance
+  prometheus_url                             # The URL of the Grafana Cloud Prometheus server
+  loki_url                                   # The URL of the Grafana Cloud Loki server
      
-     grafana_agent_logs:
-       - job_name: integrations/node_exporter
-         log_paths:
-           - /var/log/*.log     
+grafana_agent_logs:
+  - job_name: integrations/node_exporter     # The name of the job
+    log_paths:                     
+      - /var/log/*.log                       # List of the log paths to forward
+```yaml
 
 
 Dependencies
@@ -68,7 +72,6 @@ passed in as parameters) is always nice for users too:
       - job_name: integrations/node_exporter
         log_paths:
           - /var/log/*.log
-
   roles:
     - role: austincloudguru.grafana_agent
 ```
