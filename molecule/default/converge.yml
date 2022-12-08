@@ -2,6 +2,12 @@
 - name: Converge
   hosts: all
   vars:
+    grafana_agent_config:
+      prometheus-id: 123456
+      loki-id: 123456
+      api-key: abcdef-ghikjl-mnopq-rstuv-wxyz
+      prometheus-url: https://prometheus.example.com
+      loki-url: https://prometheus.example.com
 
   roles:
     - role: austincloudguru.grafana_agent

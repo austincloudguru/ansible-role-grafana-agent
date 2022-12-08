@@ -19,30 +19,30 @@ metrics:
             - target_label: instance
               replacement: {{ ansible_hostname }}
     remote_write:
-      - url: {{ grafana-agent["prometheus-url"] }}
+      - url: {{ grafana_agent_config['prometheus-url'] }}
         basic_auth:
-          username: {{ grafana-agent["prometheus-id"] }}
-          password: {{ grafana-agent["api-key"] }} 
+          username: {{ grafana_agent_config['prometheus-id'] }}
+          password: {{ grafana_agent_config['api-key'] }} 
 
 integrations:
   node_exporter:
     enabled: true
     instance: {{ ansible_hostname }}
   prometheus_remote_write:
-    - url: {{ grafana-agent["prometheus-url"] }}
+    - url: {{ grafana_agent_config['prometheus-url'] }}
       basic_auth:
-        username: {{ grafana-agent["prometheus-id"] }}
-        password: {{ grafana-agent["api-key"] }}
+        username: {{ grafana_agent_config['prometheus-id'] }}
+        password: {{ grafana_agent_config['api-key'] }}
 
 logs:
   positions_directory: /var/lib/grafana-agent/log_positions
   configs:
     - name: integrations
       clients:
-        - url: {{ grafana-agent["loki-url"] }}
+        - url: {{ grafana_agent_config['loki-url'] }}
           basic_auth:
-            username: {{ grafana-agent["loki-id"] }}
-            password: {{ grafana-agent["api-key"] }}
+            username: {{ grafana_agent_config['loki-id'] }}
+            password: {{ grafana_agent_config['api-key'] }}
       scrape_configs:
         - job_name: integrations/node_exporter_direct_scrape
           static_configs:
