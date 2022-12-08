@@ -31,6 +31,7 @@ Note: I define/create the user/group outside of the RPM so that UID/GIDs don't c
 Within your playbook, you should set the following variables:
 
 ```yaml
+## Required
 grafana_agent_config:
   prometheus_id                              # The ID of the Grafana Cloud Prometheus server
   loki_id                                    # The ID of the Grafana Cloud Loki server
@@ -38,6 +39,7 @@ grafana_agent_config:
   prometheus_url                             # The URL of the Grafana Cloud Prometheus server
   loki_url                                   # The URL of the Grafana Cloud Loki server
      
+# Optional.  If this variable is not configured, the logs section will not be created.
 grafana_agent_logs:
   - job_name: integrations/node_exporter     # The name of the job
     log_paths:                     
