@@ -43,6 +43,10 @@ grafana_agent_logs:
   - job_name: integrations/node_exporter     # The name of the job
     log_paths:                     
       - /var/log/*.log                       # List of the log paths to forward
+
+# Optional. Installs the Prometheus JMX Agent
+grafana_agent_jmx_install: false             # Enables the installation of the jmx agent (defaults to false)
+grafana_agent_jmx_version: "0.17.2"          # The version of the jmx agent to install (defaults to 0.17.2)
 ```
 
 
