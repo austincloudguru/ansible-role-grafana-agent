@@ -15,6 +15,7 @@
       - job_name: integrations/node_exporter
         log_paths:
           - /var/log/*.log
+    grafana_agent_jmx_install: true
 
   roles:
     - role: austincloudguru.grafana_agent

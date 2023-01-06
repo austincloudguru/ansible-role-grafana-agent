@@ -1,4 +1,9 @@
 ---
+- name: Install unzip
+  ansible.builtin.package:
+    name: unzip
+    state: present
+
 - name: Create the Grafana User and Group
   block:
     - name: Create Grafana Group
@@ -46,9 +51,32 @@
     state: present
   notify: Enable and Start Grafana
 
+- name: Install Java Agent
+  block:
+    - name: Check Java Agent Version
+      ansible.builtin.shell: |
+        set -o pipefail
+        if [ -f /var/lib/grafana-agent/jmx_prometheus_javaagent.jar ]; then
+          unzip -p /var/lib/grafana-agent/jmx_prometheus_javaagent.jar META-INF/MANIFEST.MF |grep Implementation-Version | cut -d' ' -f 2
+        fi
+      args:
+        executable: /bin/bash
+      register: jmx_version_check
+      changed_when: jmx_version_check.stdout != grafana_agent_jmx_version
+
+    - name: Create Directory for Java Agent
+      ansible.builtin.get_url:
+        url: "{{ maven_url }}/{{ grafana_agent_jmx_version }}/jmx_prometheus_javaagent-{{ grafana_agent_jmx_version }}.jar"
+        dest: /var/lib/grafana-agent/jmx_prometheus_javaagent.jar
+        mode: '0644'
+      when: jmx_version_check.stdout != grafana_agent_jmx_version
+  when: grafana_agent_jmx_install
+
+
 - name: Create grafana-agent.yml
   ansible.builtin.template:
     src: grafana-agent.yaml.j2
     dest: /etc/grafana-agent.yaml
+    mode: "0644"
   notify: Restart Grafana
                             
