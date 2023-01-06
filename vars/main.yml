@@ -1,2 +1,2 @@
 ---
-# vars file for ansible-role-template
+maven_url:  https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent
