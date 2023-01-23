@@ -49,7 +49,6 @@
   ansible.builtin.package:
     name: grafana-agent
     state: present
-  notify: Enable and Start Grafana
 
 - name: Install Java Agent
   block:
@@ -64,12 +63,27 @@
       register: jmx_version_check
       changed_when: jmx_version_check.stdout != grafana_agent_jmx_version
 
-    - name: Create Directory for Java Agent
+    - name: Downloading and installing the JMX agent
       ansible.builtin.get_url:
         url: "{{ maven_url }}/{{ grafana_agent_jmx_version }}/jmx_prometheus_javaagent-{{ grafana_agent_jmx_version }}.jar"
         dest: /var/lib/grafana-agent/jmx_prometheus_javaagent.jar
         mode: '0644'
+        owner: "{{ grafana_agent_user }}"
+        group: "{{ grafana_agent_group }}"
       when: jmx_version_check.stdout != grafana_agent_jmx_version
+    
+    - name: Install the Monitoring Template
+      ansible.builtin.template:
+        src: "{{ grafana_agent_jmx_template }}.yaml.j2"
+        dest: "/var/lib/grafana-agent/{{ grafana_agent_jmx_template }}.yaml"
+        mode: '0644'
+        owner: "{{ grafana_agent_user }}"
+        group: "{{ grafana_agent_group }}"
+    - name: Change /var/lib/grafana-agent permissions
+      ansible.builtin.file:
+        path: /var/lib/grafana-agent
+        mode: 0775
+        state: directory
   when: grafana_agent_jmx_install
 
 
@@ -80,3 +94,38 @@
     mode: "0644"
   notify: Restart Grafana
                             
+- name: Set acls on log file directories
+  block: 
+    - name: Set it on the directories
+      ansible.posix.acl:
+        path: "{{ item }}"
+        entity: "{{ grafana_agent_user }}"
+        state: present
+        etype: user
+        permissions: rx
+        recursive: true
+        default: true
+      with_items: "{{ grafana_agent_directory_acls }}"
+
+    - name: Set it on existing files
+      ansible.posix.acl:
+        path: "{{ item }}"
+        entity: "{{ grafana_agent_user }}"
+        state: present
+        etype: user
+        permissions: rx
+        recursive: true
+      with_items: "{{ grafana_agent_directory_acls }}"
+
+- name: Enable and Start Grafana
+  ansible.builtin.service:
+    name: grafana-agent
+    enabled: true
+    state: started
+  when: not grafana_agent_ami_builder
+                            
+- name: Enable Grafana Only
+  ansible.builtin.service:
+    name: grafana-agent
+    enabled: true
+  when: grafana_agent_ami_builder
