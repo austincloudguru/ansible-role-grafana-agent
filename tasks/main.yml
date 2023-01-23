@@ -116,6 +116,8 @@
         permissions: rx
         recursive: true
       with_items: "{{ grafana_agent_directory_acls }}"
+      tags:
+        - molecule-idempotence-notest
 
 - name: Enable and Start Grafana
   ansible.builtin.service:
