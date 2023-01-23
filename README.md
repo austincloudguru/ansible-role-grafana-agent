@@ -47,6 +47,10 @@ grafana_agent_logs:
 # Optional. Installs the Prometheus JMX Agent
 grafana_agent_jmx_install: false             # Enables the installation of the jmx agent (defaults to false)
 grafana_agent_jmx_version: "0.17.2"          # The version of the jmx agent to install (defaults to 0.17.2)
+
+# Optional. Installs the Prometheus JMX Agent
+grafana_agent_jmx_install: false             # Enables the installation of the jmx agent (defaults to false)
+grafana_agent_jmx_version: "0.17.2"          # The version of the jmx agent to install (defaults to 0.17.2)
 ```
 
 
@@ -64,6 +68,7 @@ passed in as parameters) is always nice for users too:
 - name: Install Grafana Agent
   hosts: all
   vars:
+    gfafana_agent_ami_builder: false
     grafana_agent_config:
       prometheus-id: 123456
       loki-id: 123456
@@ -77,6 +82,9 @@ passed in as parameters) is always nice for users too:
       - job_name: integrations/node_exporter
         log_paths:
           - /var/log/*.log
+    grafana_agent_jmx_template: "tomcat"
+    grafana_agent_directory_acls:
+      - /var/log/
   roles:
     - role: austincloudguru.grafana_agent
 ```

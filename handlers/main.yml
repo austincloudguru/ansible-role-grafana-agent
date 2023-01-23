@@ -1,10 +1,4 @@
 ---
-- name: Enable and Start Grafana
-  ansible.builtin.service:
-    name: grafana-agent
-    enabled: true
-    state: started
-
 - name: Restart Grafana
   ansible.builtin.service:
     name: grafana-agent

@@ -1,4 +1,5 @@
 ---
+grafana_agent_ami_builder: true
 grafana_agent_user: "grafana-agent"
 grafana_agent_group: "grafana-agent"
 grafana_agent_uid: "10012"
@@ -7,3 +8,4 @@ grafana_agent_log_level: debug
 grafana_agent_scrape_interval: 60s
 grafana_agent_jmx_install: false
 grafana_agent_jmx_version: "0.17.2"
+grafana_agent_jmx_template: "tomcat"

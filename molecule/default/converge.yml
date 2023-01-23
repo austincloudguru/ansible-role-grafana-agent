@@ -2,6 +2,7 @@
 - name: Converge
   hosts: all
   vars:
+    grafana_agent_ami_builder: false
     grafana_agent_config:
       prometheus-id: 123456
       loki-id: 123456
@@ -14,8 +15,10 @@
     grafana_agent_logs:
       - job_name: integrations/node_exporter
         log_paths:
-          - /var/log/*.log
+         - /var/log/messages*
     grafana_agent_jmx_install: true
+    grafana_agent_directory_acls:
+      - /var/log/
 
   roles:
     - role: austincloudguru.grafana_agent

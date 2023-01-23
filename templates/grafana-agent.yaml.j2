@@ -27,6 +27,15 @@ metrics:
         relabel_configs:
             - target_label: instance
               replacement: {{ ansible_hostname }}
+{% if grafana_agent_jmx_install %}
+      - job_name: jmx
+        static_configs:
+          - targets:
+            - localhost:8086
+        relabel_configs:
+            - target_label: instance
+              replacement: {{ ansible_hostname }}
+{% endif %}
     remote_write:
       - url: {{ grafana_agent_config['prometheus-url'] }}
         basic_auth:
@@ -63,6 +72,9 @@ logs:
               labels:
                 hostname: {{ ansible_hostname }}
                 instance: {{ ansible_hostname }}
+{% for item in grafana_agent_external_labels %}
+                {{ item }}: {{ grafana_agent_external_labels[item]}}
+{% endfor %}
                 job: {{ log.job_name }}
                 __path__: {{ path }}
 {% endfor %}
