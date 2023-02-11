@@ -131,3 +131,24 @@
     name: grafana-agent
     enabled: true
   when: grafana_agent_ami_builder
+
+#------------------------------------------------------------------------------
+# Setup Grafana for AMIs
+#------------------------------------------------------------------------------
+- name: Setup Extra Help for Grafana on AMIs
+  when: grafana_agent_ami_builder
+  block:
+    - name: Copy Rename Script
+      ansible.builtin.copy:
+        src: change_instance_name.sh
+        dest: /usr/local/bin/change_instance_name.sh
+        owner: root
+        group: root
+        mode: 0700
+    - name: Copy the CloudInit entry 
+      ansible.builtin.copy:
+        src: 20_fix_grafana_config.cfg
+        dest: /etc/cloud/cloud.cfg.d/20_fix_grafana_config.cfg
+        owner: root
+        group: root
+        mode: 0700

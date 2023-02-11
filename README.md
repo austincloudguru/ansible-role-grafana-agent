@@ -22,6 +22,8 @@ grafana_agent_user                           # Default User (grafana-agent)
 grafana_agent_group                          # Default Group (grafana-agent)
 grafana_agent_uid                            # Default UID (10012)
 grafana_agent_gid                            # Default GID (10012)
+grafana_agent_log_level                      # Log level for the agent (debug)
+grafana_agent_scrape_interval                # Scape Interval (60s)
 ```
 
 Note: I define/create the user/group outside of the RPM so that UID/GIDs don't clash with others and so that they are consistent across all the nodes.
@@ -47,10 +49,10 @@ grafana_agent_logs:
 # Optional. Installs the Prometheus JMX Agent
 grafana_agent_jmx_install: false             # Enables the installation of the jmx agent (defaults to false)
 grafana_agent_jmx_version: "0.17.2"          # The version of the jmx agent to install (defaults to 0.17.2)
+grafana_agent_jmx_template: "tomcat"         # Template to use for JMX.  Only Tomcat is available right now
 
-# Optional. Installs the Prometheus JMX Agent
-grafana_agent_jmx_install: false             # Enables the installation of the jmx agent (defaults to false)
-grafana_agent_jmx_version: "0.17.2"          # The version of the jmx agent to install (defaults to 0.17.2)
+# Optional.  If true, the agent will only be enabled, not started.  It will also install a cloud-init entry so the configuration file will be updated on launch with the instance hostname (from metadata).
+grafana_agent_ami_builder: true              # Declare whether you are building an AMI or not
 ```
 
 
