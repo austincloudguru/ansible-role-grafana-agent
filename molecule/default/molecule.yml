@@ -2,16 +2,15 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: podman
 lint: |
   set -e
   yamllint .
   ansible-lint
 platforms:
   - name: instance
-    image: ${MOLECULE_DISTRO}
+    image: ${MOLECULE_DISTRO:-oraclelinux:9}
     privileged: true
-    platform: amd64
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: /lib/systemd/systemd
