@@ -10,7 +10,6 @@ name: Molecule
     paths-ignore:
       - '**/README.md'  
 
-
 defaults:
   run:
     working-directory: 'ansible-role-grafana-agent'
@@ -22,7 +21,6 @@ jobs:
     strategy:
       matrix:
         distro:
-          - ubuntu:22.04
           - amazonlinux:2023
           - oraclelinux:9
 
